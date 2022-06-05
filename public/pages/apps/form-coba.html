@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Mirrored from www.bootstrapdash.com/demo/skydash/template/demo/vertical-default-light/pages/apps/email.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 10 Nov 2021 05:14:43 GMT -->
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Skydash Admin</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="../../vendors/feather/feather.css">
+    <link rel="stylesheet" href="../../vendors/ti-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="../../vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="../../css/vertical-layout-light/style.css">
+
+</head>
+<style>
+    .error {
+        border-color: red;
+    }
+
+    .error-message {
+        color: red;
+        font-style: italic;
+        margin-bottom: 1em;
+    }
+</style>
+
+<body class="body">
+    <div class="container">
+        <form id="customer_edit" style=".form-group {margin-bottom: 0.5rem !important; }" method="POST" action=""
+            data-validate>
+            <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Name</label>
+                <input type="text" class="form-control" id="customer_name" name="customer_name" value="" minlength="3"
+                    required>
+            </div>
+            <div class="form-group">
+                <label for="customer_phone" class="col-form-label">Phone</label>
+                <input type="text" class="form-control" id="customer_phone" name="customer_phone" value=""
+                    onkeyup="this.value=this.value.replace(/(\d{4})(\d+)/g, '$1 $2')" minlength="9" maxlength="17" required>
+            </div>
+            <div class="form-group">
+                <label for="customer_email" class="col-form-label">Email</label>
+                <input type="email" class="form-control" id="customer_email" name="customer_email" value="" required>
+            </div>
+            <div class="form-group">
+                <label for="customer_fax" class="col-form-label">FAX</label>
+                <input type="text" class="form-control" id="customer_fax" name="customer_fax" value="" minlength="10">
+            </div>
+            <div class="form-group">
+                <label for="customer_website" class="col-form-label">Website</label>
+                <input type="text" class="form-control" id="customer_website" name="customer_website" value=""
+                    minlength="6">
+            </div>
+            <div class="form-group">
+                <label for="customer_status" class="col-form-label">Status:</label>
+                <select class="form-control form-control-sm" id="customer_status" name="customer_status" required>
+                    <option value="" selected disabled>
+                        ---select---</option>
+                    <option value="hot">
+                        Hot</option>
+                    <option value="warm">
+                        Warm</option>
+                    <option value="cold">
+                        Cold</option>
+                    <option value="expired">Expired
+                    </option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="customer_address" class="col-form-label">Address</label>
+                <input type="text" class="form-control" id="customer_address" name="customer_address" value=""
+                    required\>
+            </div>
+            <div class="form-group">
+                <label for="customer_note" class="col-form-label">Note</label>
+                <textarea class="form-control" id="customer_note" name="customer_note" rows="2"
+                    minlength="3"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-danger text-light">Update</button>
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+            </div>
+        </form>
+    </div>
+    <!-- plugins:js -->
+    <script src="../../vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <script src="../../js/bouncer.polyfills.min.js"></script>
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="../../js/off-canvas.js"></script>
+    <script src="../../js/hoverable-collapse.js"></script>
+    <script src="../../js/template.js"></script>
+    <script src="../../js/settings.js"></script>
+    <script src="../../js/todolist.js"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page-->
+    <!-- End custom js for this page-->
+</body>
+<script>
+    var bouncer = new Bouncer('[data-validate]', {
+        disableSubmit: true,
+        customValidations: {
+            valueMismatch: function (field) {
+
+                // Look for a selector for a field to compare
+                // If there isn't one, return false (no error)
+                var selector = field.getAttribute('data-bouncer-match');
+                if (!selector) return false;
+
+                // Get the field to compare
+                var otherField = field.form.querySelector(selector);
+                if (!otherField) return false;
+
+                // Compare the two field values
+                // We use a negative comparison here because if they do match, the field validates
+                // We want to return true for failures, which can be confusing
+                return otherField.value !== field.value;
+
+            }
+        },
+        messages: {
+            valueMismatch: function (field) {
+                var customMessage = field.getAttribute('data-bouncer-mismatch-message');
+                return customMessage ? customMessage : 'Please make sure the fields match.'
+            }
+        }
+    });
+
+    document.addEventListener('bouncerFormInvalid', function (event) {
+        console.log(event.detail.errors);
+        console.log(event.detail.errors[0].offsetTop);
+        window.scrollTo(0, event.detail.errors[0].offsetTop);
+    }, false);
+
+    document.addEventListener('bouncerFormValid', function () {
+        alert('Form submitted successfully!');
+        window.location.reload();
+    }, false);
+</script>
+
+</html>

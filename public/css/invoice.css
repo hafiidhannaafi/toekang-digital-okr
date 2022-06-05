@@ -1,0 +1,14 @@
+@media print {
+    #non-printable {
+      display: none;
+  } 
+  #printableArea {
+    background-color: #fff !important;
+    -webkit-print-color-adjust: exact;
+  }
+  #dark {
+    background-color: #282f3a !important;
+    color: #ffffff !important;
+    -webkit-print-color-adjust: exact; 
+  }
+}
